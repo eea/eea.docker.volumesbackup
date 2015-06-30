@@ -1,0 +1,7 @@
+volume-copy/
+lost+found/
+.secret
+*.secret
+containers.txt
+dockervolumes.txt
+rsync-container-del.txt
