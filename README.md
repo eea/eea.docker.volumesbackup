@@ -13,7 +13,7 @@ Just run the shell script on the host where you have your docker containers runn
    $ chmod a+x docker-rsync-bck.sh
    $ ./docker-rsync-bck.sh
 ```
-The script will create a subfolder ```volume-copy`` if does not exist and store the volumes content in there.
+The script will create a folder ```/var/local/dockerbck/volume-copy``` if does not exist and will store the volumes content in there.
 
 ### TODO
 - To be dockerised. So that we can run it like:
@@ -23,5 +23,3 @@ docker run --rm \
        -v /var/lib/docker/:/var/lib/docker:ro \
        eeacms/volumesbackup
 ```
-
-- Make it compatible with Docker 1.7, since the location of volumes has changed. Docker 1.7 doesn't store anymore volumes to /var/lib/docker/vfs. It stores them to /var/lib/docker/volumes/<container_id>/_data
