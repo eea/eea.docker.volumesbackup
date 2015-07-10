@@ -8,15 +8,13 @@ fi
 chmod 777 /var/local/dockerbck/volume-copy;
 dockerver=$(docker -v | gawk '{print $3}' | sed 's/,//g')
 
-case $dockerver in
-        1.5.0|1.6.0)
+if [[ $dockerver == 1.5* ]] || [[ $dockerver == 1.6* ]]; then
                 voldir="/var/lib/docker/vfs/dir/"
-                ;;
-        *)
+                echo "old dir"
+else
                 voldir="/var/lib/docker/volumes/"
-                ;;
-esac
-
+                echo "new dir"
+fi
 
 cd /var/local/dockerbck;
 ls $voldir > dockervolumes.txt;
