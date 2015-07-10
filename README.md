@@ -18,8 +18,16 @@ The script will create a folder ```/var/local/dockerbck/volume-copy``` if does n
 ### TODO
 - To be dockerised. So that we can run it like:
 ```
+#RUN ONCE
 docker run --rm \
        -v /path/to/dockerbackup:/var/local/dockerbck/volume-copy:rw \
        -v /var/lib/docker/:/var/lib/docker:ro \
+       eeacms/volumesbackup
+       
+#SCHEDULED with CRON job in it running every 30 min
+docker run --rm \
+       -v /path/to/dockerbackup:/var/local/dockerbck/volume-copy:rw \
+       -v /var/lib/docker/:/var/lib/docker:ro \
+       -e "BACKUP_CRONTAB=30 * * * *"
        eeacms/volumesbackup
 ```
