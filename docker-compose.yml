@@ -1,0 +1,9 @@
+backup:
+  build: src
+  volumes:
+  - /:/rootfs:ro
+  - /var/lib/docker:/var/lib/docker:ro
+  - /var/local/dockerbck:/backup:rw
+  - /etc/localtime:/etc/localtime:ro
+  environment:
+  - SCHEDULE=*/1 * * * *
