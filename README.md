@@ -1,6 +1,6 @@
-# Ready to run Docker image to backup data containers/volumes
+# Ready to run Docker image to backup volumes
 
-Docker image that allows you to backup volumes inside data containers to a
+Docker image that allows you to backup volumes from your containers to a
 specific path on host.
 
 This image is generic, thus you can obviously re-use it within your
@@ -31,6 +31,7 @@ non-related EEA projects.
 
 Note that `/var/local/dockerbck` is the path on host where you want this to
 backup your docker data containers. Please modify it according with your needs.
+As a best practice this should be on a different drive (external hard-disk, nfs, etc.)
 
 ### Single run
 
@@ -55,8 +56,8 @@ exist and will store the volumes content in there.
 ## Troubleshooting
 
 If you are running this as a service make sure you also sync host time with
-docker container time, otherwise the cron will run at 3:30 AM UTC time. 
-See bellow how to fix this:
+docker container time, otherwise the cron will run at 3:30 AM UTC time and not
+your local time. See bellow how to fix this:
 
     $ docker run --rm \
      --volume=/etc/localtime:/etc/localtime:ro

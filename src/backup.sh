@@ -1,11 +1,11 @@
 #!/bin/bash
 
-if [[ ! -d "/backup/volume-copy" ]]; then
-    mkdir -p "/backup/volume-copy"
-fi
+echo ""
+echo `date` " - Backup started"
+echo "*************************************************************************"
+echo ""
 
-chmod 777 /backup/volume-copy;
-dockerver=$(chroot /rootfs docker -v | gawk '{print $3}' | sed 's/,//g')
+dockerver=$(/usr/sbin/chroot /rootfs docker -v | gawk '{print $3}' | sed 's/,//g')
 
 if [[ $dockerver == 1.5* ]] || [[ $dockerver == 1.6* ]]; then
   voldir="/var/lib/docker/vfs/dir/"
@@ -16,12 +16,18 @@ fi
 cd /backup;
 ls $voldir > dockervolumes.txt;
 
+mkdir -p "/backup/volume-copy"
 for i in `cat dockervolumes.txt`; do
-  rsync -avrz /$i /backup
+  rsync -avrz $voldir$i /backup/volume-copy
 done
 
-chroot /rootfs docker ps -a | grep data | gawk '{print $NF}' > containers.txt;
+/usr/sbin/chroot /rootfs docker ps -a | grep data | gawk '{print $NF}' > containers.txt;
 
 for i in `cat containers.txt`; do
-  chroot docker inspect $i | grep $voldir | awk '/"(.*)"/ { gsub(/"/,"",$2); print $2 }' | sed 's/,//g' > volume-copy/$i-volpath.txt;
+  /usr/sbin/chroot /rootfs docker inspect $i | grep $voldir | awk '/"(.*)"/ { gsub(/"/,"",$2); print $2 }' | sed 's/,//g' > volume-copy/$i-volpath.txt;
 done
+
+echo ""
+echo "*************************************************************************"
+echo `date` " - Backup done"
+echo ""

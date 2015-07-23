@@ -1,9 +1,9 @@
 backup:
-  build: src
+  image: eeacms/volumesbackup
   volumes:
   - /:/rootfs:ro
   - /var/lib/docker:/var/lib/docker:ro
-  - /var/local/dockerbck:/backup:rw
   - /etc/localtime:/etc/localtime:ro
+  - /var/local/dockerbck:/backup:rw
   environment:
-  - SCHEDULE=*/1 * * * *
+  - SCHEDULE=30 3 * * *
