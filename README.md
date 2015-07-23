@@ -10,7 +10,7 @@ non-related EEA projects.
 ## Supported tags and respective Dockerfile links
 
   - `:latest` (default)
-  - `1.0`
+  - `:1.0`
 
 
 ## Base docker image
