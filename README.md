@@ -34,6 +34,10 @@ Note that `/var/local/dockerbck` is the path on host where you want this to
 backup your docker data containers. Please modify it according with your needs.
 As a best practice this should be on a different drive (external hard-disk, nfs, etc.)
 
+This will create a folder at `/var/local/dockerbck/volume-copy` if it does not
+exist and will store the volumes content in there.
+
+
 ### Single run
 
     $ docker run --rm \
@@ -41,6 +45,7 @@ As a best practice this should be on a different drive (external hard-disk, nfs,
       --volume=/var/lib/docker/:/var/lib/docker:ro \
       --volume=/var/local/dockerbck:/backup:rw \
       eeacms/volumesbackup
+
 
 ### Run daily at 3:30 AM
 
@@ -51,8 +56,34 @@ As a best practice this should be on a different drive (external hard-disk, nfs,
       -e "SCHEDULE=30 3 * * *" \ 
       eeacms/volumesbackup
 
-This will create a folder at `/var/local/dockerbck/volume-copy` if it does not
-exist and will store the volumes content in there.
+
+### Run via docker-compose daily at 3:30 AM
+
+Edit `docker-compose.yml`
+
+    backup:
+      image: eeacms/volumesbackup
+      volumes:
+      - /:/rootfs:ro
+      - /var/lib/docker:/var/lib/docker:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /var/local/dockerbck:/backup:rw
+      environment:
+      - SCHEDULE=30 3 * * *
+
+Start
+
+    $ docker-compose up -d
+    $ docker-compose logs
+
+Upgrade
+
+    $ docker-compose pull
+
+    $ docker-compose stop
+    $ docker-compose rm -v
+    $ docker-compose up -d
+
 
 ## Troubleshooting
 
