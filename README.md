@@ -66,6 +66,13 @@ your local time. See bellow how to fix this:
     eeacms/volumesbackup
 
 
+## Supported environment variables ##
+
+* `SCHEDULE` Schedule backup at specific time with cron (e.g. `SCHEDULE=30 3 * * *`)
+  Check [wikipedia](https://en.wikipedia.org/wiki/Cron#Configuration_file)
+  for more details about crontab format.
+
+
 ## Copyright and license
 
 The Initial Owner of the Original Code is European Environment Agency (EEA).
