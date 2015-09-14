@@ -27,6 +27,11 @@ for i in `cat containers.txt`; do
   /usr/sbin/chroot /rootfs docker inspect $i | grep $voldir | awk '/"(.*)"/ { gsub(/"/,"",$2); print $2 }' | sed 's/,//g' > volume-copy/$i-volpath.txt;
 done
 
+# add a timestamp file that show when last backup was done, can be used by check_mk/nagios
+date +%s > /backup/lastrun-dockervolbck
+echo ""
+echo "Written lastrun timestamp in file: <backupdir>/lastrun-dockervolbck"
+
 echo ""
 echo "*************************************************************************"
 echo `date` " - Backup done"
