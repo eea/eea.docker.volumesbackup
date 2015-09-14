@@ -11,6 +11,7 @@ non-related EEA projects.
 
   - `:latest` (default)
   - `:1.0`
+  - `:1.1`
 
 
 ## Base docker image
@@ -37,6 +38,9 @@ As a best practice this should be on a different drive (external hard-disk, nfs,
 This will create a folder at `/var/local/dockerbck/volume-copy` if it does not
 exist and will store the volumes content in there.
 
+At each run the container will leave a last run timestamp file in the backup directory e.g. 
+/var/local/dockerbck/lastrun-dockervolbck. This file can be used to monitor when the backup
+cron job was last run.
 
 ### Single run
 
