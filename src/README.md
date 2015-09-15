@@ -51,17 +51,17 @@ cron job was last run.
       eeacms/volumesbackup
 
 
-### Run daily at 3:30 AM
+### Run daily at 0:20 AM
 
     $ docker run --rm \
       --volume=/:/rootfs:ro \
       --volume=/var/lib/docker/:/var/lib/docker:ro \
       --volume=/var/local/dockerbck:/backup:rw \
-      -e "SCHEDULE=30 3 * * *" \ 
+      -e "SCHEDULE=20 0 * * *" \ 
       eeacms/volumesbackup
 
 
-### Run via docker-compose daily at 3:30 AM
+### Run via docker-compose daily at 0:20 AM
 
 Edit `docker-compose.yml`
 
@@ -73,7 +73,7 @@ Edit `docker-compose.yml`
       - /etc/localtime:/etc/localtime:ro
       - /var/local/dockerbck:/backup:rw
       environment:
-      - SCHEDULE=30 3 * * *
+      - SCHEDULE=20 0 * * *
 
 Start
 
