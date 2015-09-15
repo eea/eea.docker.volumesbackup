@@ -88,7 +88,7 @@ Start
 ### Upgrades
 
     $ docker-compose stop    # stop the running containers
-    $ git pull origin master # and get the docker-compose.yml containing the latests tagscd eea.docker.volumesbackup
+    $ git pull origin master # and get the docker-compose.yml containing the latests tags
     $ docker-compose pull    # get the images and their tags
 
     $ docker images | grep eeacms # inspect that the new images have been downloaded
