@@ -63,10 +63,15 @@ cron job was last run.
 
 ### Run via docker-compose daily at 0:20 AM
 
-Edit `docker-compose.yml`
+First time deployement
+
+    $ git clone https://github.com/eea/eea.docker.volumesbackup
+    $ cd eea.docker.volumesbackup
+
+Edit the `docker-compose.yml` if you need to change backup path or SCHEDULE time
 
     backup:
-      image: eeacms/volumesbackup
+      image: eeacms/volumesbackup:1.1
       volumes:
       - /:/rootfs:ro
       - /var/lib/docker:/var/lib/docker:ro
@@ -78,9 +83,9 @@ Edit `docker-compose.yml`
 Start
 
     $ docker-compose up -d
-    $ docker-compose logs
+    $ docker-compose logs # if you want to see the running process output
 
-Upgrade
+### Upgrades
 
     $ docker-compose stop    # stop the running containers
     $ git pull origin master # and get the docker-compose.yml containing the latests tagscd eea.docker.volumesbackup
