@@ -1,4 +1,5 @@
 backup:
+  restart: always
   image: eeacms/volumesbackup:1.1
   volumes:
   - /:/rootfs:ro
