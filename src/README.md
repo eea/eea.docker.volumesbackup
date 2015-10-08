@@ -71,6 +71,7 @@ First time deployement
 Edit the `docker-compose.yml` if you need to change backup path or SCHEDULE time
 
     backup:
+      restart: always
       image: eeacms/volumesbackup:1.1
       volumes:
       - /:/rootfs:ro
